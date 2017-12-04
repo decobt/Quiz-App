@@ -15,6 +15,14 @@ const quizReducer = function (state = initialState, action){
         }
       }
     }
+    case 'DELETE_QUIZ': {
+      console.log(action.payload);
+      break;
+    }
+    case 'UPDATE_QUIZ': {
+      console.log(action.payload);
+      break;
+    }
     default:
       return state;
   }

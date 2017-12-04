@@ -5,7 +5,7 @@ import './App.css';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
-import setQuiz from './actions/actions.js';
+import actions from './actions/actions.js';
 
 class App extends Component {
   constructor(props){
@@ -23,7 +23,7 @@ class App extends Component {
     var self = this;
     axios.post('/api/quiz', {name:name, description:description})
     .then(function (response) {
-      self.props.setUser(response.data);
+      self.props.addQuiz(response.data);
     })
     .catch(function (error) {
       console.log(error);
@@ -66,6 +66,6 @@ function mapStateToProps(state) {
   return state;
 }
 function mapDispatchToProps(dispatch) {
-  return { setUser: bindActionCreators(setQuiz, dispatch) }
+  return { addQuiz: bindActionCreators(actions.setQuiz, dispatch) }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App);
