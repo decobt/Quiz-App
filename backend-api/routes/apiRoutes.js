@@ -5,14 +5,19 @@ var apiRoutes = express.Router();
 //get models
 var quizModel = require('../models/quizModel');
 
+//helper callback function
+var returnResponse = function(data, res){
+  //send back json response
+  res.json(data);
+}
+
 apiRoutes.route('/quiz')
   .get(function (req, res) {
-    res.json({'description':quizModel.findAllQuiz()});
+    quizModel.findQuiz({}, returnResponse, res);
   })
   .post(function (req, res) {
-    //get the post data
-    console.log(req.body);
-    res.json({id:0, name: req.body.name, description: req.body.description});
+    //call model function to add data to db, pass callback function
+    quizModel.addQuiz(req.body, returnResponse, res);
   })
   .put(function (req, res) {
     res.json({'description':quizModel.findAllQuiz()});
