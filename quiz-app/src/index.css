@@ -1,4 +1,22 @@
 body{
   font-family: sans-serif;
   background:#e74c3c;
+  padding:50px 0px;
+}
+.loader {
+  position: fixed;
+  z-index: 999;
+  height: 78px;
+  width: 78px;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.loader i{
+  font-size:78px;
+  color:#333;
 }

@@ -1,28 +1,25 @@
 .App {
   text-align: center;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.create-button{
+  background:#3498db;
+  padding:20px;
+  font-size:32px;
 }
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.delete-button{
+  background:#2980b9;
+  padding:20px;
+  font-size:32px;
 }
-
-.App-title {
-  font-size: 1.5em;
+.delete-button:hover i, .create-button:hover i{
+  color:white;
 }
-
-.App-intro {
-  font-size: large;
+.search-bar{
+  border-radius:0;
+  padding:20px;
+  height:80px;
+  font-size:20px;
 }
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+input[type=checkbox] {
+  transform: scale(1.5);
 }
