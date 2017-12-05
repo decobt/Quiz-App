@@ -1,4 +1,17 @@
 var actions = {
+ fetchingQuiz(){
+   return {
+     type: 'FETCHING_QUIZ'
+   }
+ },
+
+ fetchedQuiz(args){
+   return {
+     type: 'FETCHED_QUIZ',
+     payload: args
+   }
+ },
+
  setQuiz(args){
     return {
       type: 'SET_QUIZ',

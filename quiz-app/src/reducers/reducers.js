@@ -1,4 +1,8 @@
 const initialState = {
+  isFetching: false,
+  question: '',
+  options: '',
+  answer: '',
   byID:[],
   byHash:[]
 }
@@ -13,6 +17,16 @@ const quizReducer = function (state = initialState, action){
           ...state.byHash,
           [action.payload.id]: action.payload
         }
+      }
+    }
+    case 'FETCHING_QUIZ': {
+      return { ...state, isFetching:true}
+    }
+    case 'FETCHED_QUIZ':{
+      return {
+        isFetching:false,
+        byID: action.payload.byId,
+        byHash: action.payload.byHash
       }
     }
     case 'DELETE_QUIZ': {
