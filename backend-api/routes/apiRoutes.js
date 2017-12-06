@@ -26,9 +26,14 @@ apiRoutes.route('/quiz')
     res.json({'description':quizModel.findAllQuiz()});
   });
 
+apiRoutes.route('/quiz/random')
+  .get(function (req, res) {
+    quizModel.findRandom({}, returnResponse, res);
+  });
+
 apiRoutes.route('/:quiz/question')
     .get(function (req, res) {
-      res.json({'description':quizModel.findAllQuiz()});
+      res.json({'description':quizModel.findRandom()});
     })
     .post(function (req, res) {
       res.json({'description':quizModel.findAllQuiz()});
