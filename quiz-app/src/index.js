@@ -4,6 +4,8 @@ import {createStore} from 'redux';
 import { Provider } from 'react-redux';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
+import registerServiceWorker from './registerServiceWorker';
+
 import './index.css';
 import App from './App';
 import Quiz from './Quiz';
@@ -22,3 +24,5 @@ ReactDOM.render((
     </Router>
   </Provider>
 ), document.getElementById('root'));
+
+registerServiceWorker();

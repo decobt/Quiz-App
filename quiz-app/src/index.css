@@ -2,6 +2,7 @@ body{
   font-family: sans-serif;
   background:#e74c3c;
   padding:50px 0px;
+  height:100%
 }
 .loader {
   position: fixed;
@@ -19,4 +20,55 @@ body{
 .loader i{
   font-size:78px;
   color:#333;
+}
+
+.scoreDis {
+  position: fixed;
+  z-index: 999;
+  height: 250px;
+  width: 250px;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.scoreDis i:hover{
+  color:#3498db;
+}
+
+input[type=checkbox] {
+  transform: scale(1.5);
+}
+input[type=radio] {
+  transform: scale(1.5);
+}
+
+.App {
+  text-align: center;
+}
+.create-button{
+  background:#3498db;
+  padding:20px;
+  font-size:32px;
+}
+.delete-button{
+  background:#2980b9;
+  padding:20px;
+  font-size:32px;
+}
+.delete-button:hover i, .create-button:hover i{
+  color:white;
+}
+.search-bar{
+  border-radius:0;
+  padding:20px;
+  height:80px;
+  font-size:20px;
+}
+
+.answer:hover{
+  background:#337ab7;
 }

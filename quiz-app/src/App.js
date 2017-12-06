@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 
 //import components that will be used in App
 import AddQuizForm from './components/AddQuizForm.js';
@@ -87,10 +86,10 @@ class App extends Component {
           <div className="col-sm-10" style={{padding:'20px', color:'white', fontSize:'32px'}}>
             <span>Quiz-Co App</span>
           </div>
-          <div className="col-sm-1 text-center create-button" data-toggle="collapse" href="#collapseExample">
+          <div className="col-xs-6 col-sm-1 text-center create-button" data-toggle="collapse" href="#collapseExample">
             <i className="fa fa-plus" aria-hidden="true"></i>
           </div>
-          <div className="col-sm-1 text-center delete-button" onClick={this.onSubmitFormClick}>
+          <div className="col-xs-6 col-sm-1 text-center delete-button" onClick={this.onSubmitFormClick}>
             <i className="fa fa-trash" aria-hidden="true"></i>
           </div>
         </div>
