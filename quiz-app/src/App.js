@@ -24,7 +24,16 @@ class App extends Component {
         items.push(elements[i].value);
       }
     }
-    console.log(items)
+    var self = this;
+    //console.log(items);
+    axios.delete('api/quiz', {data: {items: items}} )
+    .then(function (response){
+      console.log(response.data);
+      self.props.deleteQuiz(response.data)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   componentWillMount(){
@@ -117,7 +126,8 @@ function mapStateToProps(state) {
   return {byHash: state.byHash, isFetching: state.isFetching};
 }
 function mapDispatchToProps(dispatch) {
-  return { fetchingQuiz: bindActionCreators(actions.fetchingQuiz, dispatch),
+  return { deleteQuiz: bindActionCreators(actions.deleteQuiz, dispatch),
+            fetchingQuiz: bindActionCreators(actions.fetchingQuiz, dispatch),
            fetchedQuiz: bindActionCreators(actions.fetchedQuiz, dispatch) }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -22,7 +22,7 @@ var actions = {
  deleteQuiz(args){
     return {
       type: 'DELETE_QUIZ',
-      payload: args
+      payload: {id: args}
     }
   },
 

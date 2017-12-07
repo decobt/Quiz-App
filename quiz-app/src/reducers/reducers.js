@@ -31,7 +31,8 @@ const quizReducer = function (state = initialState, action){
     }
     case 'DELETE_QUIZ': {
       console.log(action.payload);
-      break;
+      console.log(state.byHash.filter(({ id }) => id !== action.data))
+      return state
     }
     case 'UPDATE_QUIZ': {
       console.log(action.payload);

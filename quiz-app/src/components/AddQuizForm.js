@@ -18,6 +18,11 @@ class AddQuizForm extends Component {
     var options = e.target.options.value;
     var answer = e.target.answer.value;
 
+    //reset values of fields
+    e.target.question.value = "";
+    e.target.options.value = "";
+    e.target.answer.value = "";
+
     var self = this;
     //make api post request, send data
     axios.post('/api/quiz', {question:question, options:options.split(','), answer:answer})
@@ -26,6 +31,8 @@ class AddQuizForm extends Component {
       //console.log(response);
       //dispatch action with the response
       self.props.addQuiz(response.data);
+      //display alert to notify user
+      alert('SUCCESSFULLY ADDED QUESTION!');
     })
     .catch(function (error) {
       //check for error and display them in console

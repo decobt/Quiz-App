@@ -24,6 +24,8 @@ class Quiz extends Component {
       //when you get the response data
       var byId = [], byHash=[];
       //loop through it
+      // eslint-disable-next-line
+      if(response.data!=undefined){
       for(var i in response.data){
         //organize the data
         byHash.push({
@@ -33,6 +35,7 @@ class Quiz extends Component {
           answer: response.data[i].answer
         });
         byId.push(response.data[i].id);
+      }
       }
       //after 2 seconds fire proba function
       setTimeout(proba, 2000);
