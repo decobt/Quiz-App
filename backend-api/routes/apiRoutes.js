@@ -23,7 +23,8 @@ apiRoutes.route('/quiz')
     res.json({'description':quizModel.findAllQuiz()});
   })
   .delete(function (req, res) {
-    res.json({'description':quizModel.findAllQuiz()});
+    console.log(req.body.items)
+    quizModel.deleteQuiz(req.body.items, returnResponse, res);
   });
 
 apiRoutes.route('/quiz/random')

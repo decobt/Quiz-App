@@ -71,8 +71,15 @@ var functions = {
   updateQuiz: function(args){
     return "findOneQuiz Feedback";
   },
-  deleteQuiz: function(args){
-    return "findOneQuiz Feedback";
+  deleteQuiz: function(args, callbackFunct, res){
+    quizModel.remove({
+        '_id': {$in: args}
+    }, function(err, numberRemoved) {
+        if (err) throw (err);
+        //console.log("Removed succesfully " + numberRemoved.result.n + "records");
+        //newsCallback(err, numberRemoved.result.n);
+        callbackFunct(args, res);
+    });
   },
   deleteQuestion: function(args){
     return "findOneQuiz Feedback";
