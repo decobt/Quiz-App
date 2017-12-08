@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+//import axios, actions, and connect
 import axios from 'axios';
 import { bindActionCreators } from 'redux';
 import actions from './actions/actions.js';
@@ -8,12 +9,16 @@ import {connect} from 'react-redux';
 class Quiz extends Component {
   constructor(props){
     super(props);
+    //define state, progress and score will change
     this.state = {
       progress: this.props.progress,
       score: this.props.score
     }
+    //bind onSubmitQuestion event
     this.onSubmitQuestion = this.onSubmitQuestion.bind(this);
   }
+
+  //Makes a get request to get 10 random question
   componentWillMount(){
     let self = this;
     //dispatch action that you are about to fetch data
@@ -26,16 +31,16 @@ class Quiz extends Component {
       //loop through it
       // eslint-disable-next-line
       if(response.data!=undefined){
-      for(var i in response.data){
-        //organize the data
-        byHash.push({
-          id:response.data[i]._id,
-          question: response.data[i].question,
-          options: response.data[i].options,
-          answer: response.data[i].answer
-        });
-        byId.push(response.data[i].id);
-      }
+        for(var i in response.data){
+          //organize the data
+          byHash.push({
+            id:response.data[i]._id,
+            question: response.data[i].question,
+            options: response.data[i].options,
+            answer: response.data[i].answer
+          });
+          byId.push(response.data[i].id);
+        }
       }
       //after 2 seconds fire proba function
       setTimeout(proba, 2000);
@@ -45,29 +50,43 @@ class Quiz extends Component {
       }
     })
   }
+
+  //function that fires when a user answers a question
   onSubmitQuestion(answer,e){
+      //check the db answer and the user clicked
       // eslint-disable-next-line
       if(answer == e.target.value){
         //console.log('equal');
+        //if equals change the state, increment both progress and score
+        //progress is used to keep track which question is at the moment
         this.setState({
           progress: this.state.progress + 1,
           score: this.state.score + 1
         });
       }else{
+        //if not equal, increment only the progress
         this.setState({
           progress: this.state.progress + 1,
         });
       }
+      //decheck the radio button
       e.target.checked = false;
   }
+
+  //function used to start the quiz over again
   resetQuiz(){
+    //set state, progress and score to zero
     this.setState({
       progress: 0,
       score: 0
     })
   }
+
   render(){
+    //define pom and calculate it to display progress bar (0-100)
     let pom = this.state.progress*10;
+
+    //if data is fetching from the backend, display loading icon
     if(this.props.isFetching){
       return (
         //render the loader icon if true
@@ -77,8 +96,16 @@ class Quiz extends Component {
         </div>
       );
     }else{
+      //define prompt variable that will hold the current question to display
       let prompt = this.props.questions[this.state.progress];
+      //define an empty array, to hold the answer options
+      let options = [];
+      //check if prompt is defined
       if(prompt !== undefined){
+        //loop through and get the options
+        for(let i=0; i<4; i++){
+          options.push(<Option key={i} data={prompt.options[i]} onChangeFunc={this.onSubmitQuestion.bind(this, prompt.answer)} />)
+        }
         return (
           <div className="container">
 
@@ -89,21 +116,15 @@ class Quiz extends Component {
             <div className="col-xs-5 col-sm-1 text-center create-button" data-toggle="collapse" href="#collapseExample">
               {this.state.score}
             </div>
-            <div className="col-xs-7 col-sm-2 text-center delete-button" onClick={this.onSubmitFormClick}>
-              Points
-            </div>
+            <div className="col-xs-7 col-sm-2 text-center delete-button" onClick={this.onSubmitFormClick}>Points</div>
           </div>
 
           <div className="row text-left" style={{background:'#f5f5f5'}}>
-
             <div className="display" style={{padding:'50px 10px'}}>
               <h1>Question {this.state.progress+1}: {prompt.question}</h1>
             </div>
             <form onSubmit={this.onSubmitQuestion}>
-              <Option data={prompt.options[0]} onChangeFunc={this.onSubmitQuestion.bind(this, prompt.answer)} />
-              <Option data={prompt.options[1]} onChangeFunc={this.onSubmitQuestion.bind(this, prompt.answer)}/>
-              <Option data={prompt.options[2]} onChangeFunc={this.onSubmitQuestion.bind(this, prompt.answer)}/>
-              <Option data={prompt.options[3]} onChangeFunc={this.onSubmitQuestion.bind(this, prompt.answer)}/>
+              {options}
             </form>
           </div>
 
@@ -118,6 +139,8 @@ class Quiz extends Component {
           </div>
         );
       }else{
+        //if prompt is not defined it means that its the quiz extends
+        //display the score and the reset button
         return (
           <div className="scoreDis text-center">
           <h1>Your score: {this.state.score}</h1>
@@ -129,6 +152,7 @@ class Quiz extends Component {
   }
 }
 
+//Options component, used to display the offered answer choices
 class Option extends Component{
   render(){
     return (

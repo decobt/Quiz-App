@@ -15,25 +15,55 @@ class App extends Component {
     super(props);
     this.onSubmitFormClick = this.onSubmitFormClick.bind(this);
   }
+
+  //Function to delete multiple questions
   onSubmitFormClick(e){
+    //prevent default event
     e.preventDefault();
+    //define an empty array to store the data
     var items = [];
+    //get all elements from the form
     var elements = document.getElementById("myForm").elements;
+    //loop through the elements and check which ones are checked
     for(var i in elements){
       if(elements[i].checked === true){
+        //if checked, push the value (id) to the array
         items.push(elements[i].value);
       }
     }
+    //make a call to the helper function to delete the items
+    this.deleteApiCall(items);
+  }
+
+  //helper function that makes a call to the api to delete question/s
+  deleteApiCall(items){
     var self = this;
     //console.log(items);
+    //make a call to the api, pass the items
+    // items = [id1, id2, id3....]
     axios.delete('api/quiz', {data: {items: items}} )
     .then(function (response){
+      //get the response from the api
       console.log(response.data);
+      //despatch redux action
       self.props.deleteQuiz(response.data)
     })
     .catch(function (error) {
+      //if error, display the error in the console
       console.log(error);
     });
+  }
+
+  //delete question function, on button click
+  deleteQuestion(id, event){
+    //prevent default event
+    event.preventDefault();
+    //define an array
+    let items = [];
+    //push the id into the array
+    items.push(id);
+    //call the helper function
+    this.deleteApiCall(items);
   }
 
   componentWillMount(){
@@ -74,7 +104,7 @@ class App extends Component {
     var rows = [];
     for(var quiz in this.props.byHash){
       rows.push(
-        <ListItem key={quiz} data={this.props.byHash[quiz]} />
+        <ListItem key={quiz} data={this.props.byHash[quiz]} onClick={this.deleteQuestion.bind(this, this.props.byHash[quiz].id)}/>
       );
     }
     //check if isFetching is equal to true
@@ -110,6 +140,7 @@ class App extends Component {
         <div className="row">
           <input className="form-control search-bar" name="search" placeholder="Search..." />
         </div>
+
         <div className="row">
           <form id="myForm">
             {rows}
@@ -127,7 +158,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return { deleteQuiz: bindActionCreators(actions.deleteQuiz, dispatch),
-            fetchingQuiz: bindActionCreators(actions.fetchingQuiz, dispatch),
+           fetchingQuiz: bindActionCreators(actions.fetchingQuiz, dispatch),
            fetchedQuiz: bindActionCreators(actions.fetchedQuiz, dispatch) }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App);
