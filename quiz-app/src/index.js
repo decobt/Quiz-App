@@ -10,24 +10,17 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 import App from './App';
 import Quiz from './Quiz';
-import Login from './Login';
-import Logout from './Logout';
+import Login from './components/Login';
+import EnsureLoggedIn from './components/EnsureLoggedIn';
+
+//import reducers
 import reducers from './reducers/reducers';
 
-let store = createStore(reducers);
+var store = createStore(reducers);
 
-function loggedIn() {
-  // ...
-  return false;
-}
-
-function requireAuth(nextState, replace) {
-  if (!loggedIn()) {
-    replace({
-      pathname: '/login'
-    })
-  }
-}
+store.subscribe(() => {
+  console.log(store.getState());
+});
 
 ReactDOM.render((
   <Provider store={store}>
@@ -35,10 +28,12 @@ ReactDOM.render((
       <Route path="/"  >
         <IndexRoute component={Quiz} />
         <Route path='login' component={Login} />
-        <Route path="dashboard" onEnter={this.requireAuth} component={App} />
-        <Route path="quiz/:id" component={App} />
-        <Route path='logout' component={Logout} />
-        <Route path='*' component={ Logout } />
+
+        <Route component={EnsureLoggedIn}>
+          <Route path="dashboard" component={App} />
+        </Route>
+
+        <Route path='*' component={Quiz} />
       </Route>
     </Router>
   </Provider>

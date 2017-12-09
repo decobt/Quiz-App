@@ -13,7 +13,11 @@ import actions from './actions/actions.js';
 class App extends Component {
   constructor(props){
     super(props);
+    this.state = {
+      searchText: ''
+    }
     this.onSubmitFormClick = this.onSubmitFormClick.bind(this);
+    this.searchQuestion = this.searchQuestion.bind(this);
   }
 
   //Function to delete multiple questions
@@ -35,6 +39,12 @@ class App extends Component {
     this.deleteApiCall(items);
   }
 
+  searchQuestion(e){
+    console.log(e.target.value);
+    this.setState({
+      searchText: e.target.value
+    })
+  }
   //helper function that makes a call to the api to delete question/s
   deleteApiCall(items){
     var self = this;
@@ -102,10 +112,23 @@ class App extends Component {
   render() {
     //generate ListItem for each object in byHash
     var rows = [];
+    //loop through the array of questions
     for(var quiz in this.props.byHash){
-      rows.push(
-        <ListItem key={quiz} data={this.props.byHash[quiz]} onClick={this.deleteQuestion.bind(this, this.props.byHash[quiz].id)}/>
-      );
+      //check if searchText is set
+      if(this.state.searchText===''){
+        //if not, just push listitem
+        rows.push(
+          <ListItem key={quiz} data={this.props.byHash[quiz]} onClick={this.deleteQuestion.bind(this, this.props.byHash[quiz].id)}/>
+        );
+      }else{
+        //if searchtext is set, compare searchText with question
+        if(this.props.byHash[quiz].question.toLowerCase().indexOf(this.state.searchText)>= 0){
+          //then push listitem
+          rows.push(
+            <ListItem key={quiz} data={this.props.byHash[quiz]} onClick={this.deleteQuestion.bind(this, this.props.byHash[quiz].id)}/>
+          );
+        }
+      }
     }
     //check if isFetching is equal to true
     if(this.props.isFetching){
@@ -138,7 +161,7 @@ class App extends Component {
         </div>
 
         <div className="row">
-          <input className="form-control search-bar" name="search" placeholder="Search..." />
+          <input className="form-control search-bar" onChange={this.searchQuestion} name="search" placeholder="Search..." />
         </div>
 
         <div className="row">

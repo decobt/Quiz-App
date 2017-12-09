@@ -26,9 +26,9 @@ var actions = {
     }
   },
 
-  updateQuiz(args){
+  loginUser(args){
     return {
-      type: 'UPDATE_QUIZ',
+      type: 'LOGIN_USER',
       payload: args
     }
   }

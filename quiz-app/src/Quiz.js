@@ -27,7 +27,7 @@ class Quiz extends Component {
     axios.get('/api/quiz/random')
     .then(function (response) {
       //when you get the response data
-      var byId = [], byHash=[];
+      var byHash=[];
       //loop through it
       // eslint-disable-next-line
       if(response.data!=undefined){
@@ -39,14 +39,13 @@ class Quiz extends Component {
             options: response.data[i].options,
             answer: response.data[i].answer
           });
-          byId.push(response.data[i].id);
         }
       }
       //after 2 seconds fire proba function
       setTimeout(proba, 2000);
       function proba(){
         //dispatch action that the data has been received
-        self.props.fetchedQuiz({byId:byId, byHash:byHash});
+        self.props.fetchedQuiz({byHash:byHash});
       }
     })
   }
