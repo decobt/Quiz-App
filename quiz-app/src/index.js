@@ -27,14 +27,13 @@ ReactDOM.render((
     <Router history={browserHistory}>
       <Route path="/"  >
         <IndexRoute component={Quiz} />
-        <Route path='*' component={Quiz} />
-
         <Route path='login' component={Login} />
 
         <Route component={EnsureLoggedIn}>
           <Route path="dashboard" component={App} />
         </Route>
 
+        <Route path='*' component={Quiz} />
       </Route>
     </Router>
   </Provider>
