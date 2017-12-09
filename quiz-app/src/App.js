@@ -69,7 +69,7 @@ class App extends Component {
     axios.delete('api/quiz', {data: {items: items}} )
     .then(function (response){
       //get the response from the api
-      console.log(response.data);
+      //console.log(response.data);
       //despatch redux action
       self.props.deleteQuiz(response.data)
     })
@@ -99,7 +99,7 @@ class App extends Component {
     axios.get('/api/quiz')
     .then(function (response) {
       //when you get the response data
-      var byId = [], byHash=[];
+      var byHash=[];
       //loop through it
       for(var i in response.data){
         //organize the data
@@ -109,13 +109,12 @@ class App extends Component {
           options: response.data[i].options,
           answer: response.data[i].answer
         });
-        byId.push(response.data[i].id);
       }
       //after 2 seconds fire proba function
       setTimeout(proba, 2000);
       function proba(){
         //dispatch action that the data has been received
-        self.props.fetchedQuiz({byId:byId, byHash:byHash});
+        self.props.fetchedQuiz({byHash:byHash});
       }
     })
     .catch(function (error) {
