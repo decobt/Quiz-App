@@ -19,10 +19,9 @@ const quizReducer = function (state = initialState, action){
     case 'SET_QUIZ': {
       //console.log(action.payload);
       return {...state,
-        byHash: {
-          ...state.byHash,
-          [state.byHash.length]: action.payload
-        }
+        byHash: [
+          ...state.byHash, action.payload
+        ]
       }
     }
     case 'FETCHING_QUIZ': {
@@ -36,9 +35,10 @@ const quizReducer = function (state = initialState, action){
       }
     }
     case 'DELETE_QUIZ': {
-      console.log(action.payload);
-      console.log(state.byHash.filter(({ id }) => id !== action.data))
-      return state
+      //console.log(action.payload.id);
+      return {...state,
+        byHash: state.byHash.filter(item => action.payload.id.indexOf(item.id) === -1 )
+        }
     }
     case 'LOGIN_USER': {
       return {...state, loggedIn:action.payload}
