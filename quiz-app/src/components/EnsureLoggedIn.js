@@ -5,7 +5,7 @@ import {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
 
 class EnsureLoggedIn extends Component {
-  componentDidMount() {
+  componentWillMount() {
     //check if user is logged in
     if(!this.props.login){
       //if not redirect to login form

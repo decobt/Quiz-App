@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Cookies from 'universal-cookie';
+import {browserHistory} from 'react-router';
 
 //import components that will be used in App
 import AddQuizForm from './components/AddQuizForm.js';
@@ -13,13 +15,25 @@ import actions from './actions/actions.js';
 class App extends Component {
   constructor(props){
     super(props);
+    //define the state
     this.state = {
       searchText: ''
     }
+    //bind all functions
     this.onSubmitFormClick = this.onSubmitFormClick.bind(this);
     this.searchQuestion = this.searchQuestion.bind(this);
+    this.logoutUser = this.logoutUser.bind(this);
   }
 
+  logoutUser(){
+    const cookie = new Cookies();
+    //remove cookie with login status
+    cookie.remove('status');
+    //update the state tree
+    this.props.loginUser(false);
+    //redirect path to login form
+    browserHistory.replace('/login');
+  }
   //Function to delete multiple questions
   onSubmitFormClick(e){
     //prevent default event
@@ -40,7 +54,8 @@ class App extends Component {
   }
 
   searchQuestion(e){
-    console.log(e.target.value);
+    //console.log(e.target.value);
+    //update the state searchText
     this.setState({
       searchText: e.target.value
     })
@@ -145,14 +160,17 @@ class App extends Component {
       <div className="container">
 
         <div className="row" style={{background:'#333'}}>
-          <div className="col-sm-10" style={{padding:'20px', color:'white', fontSize:'32px'}}>
+          <div className="col-sm-9" style={{padding:'20px', color:'white', fontSize:'32px'}}>
             <span>Quiz-Co App</span>
           </div>
-          <div className="col-xs-6 col-sm-1 text-center create-button" data-toggle="collapse" href="#collapseExample">
+          <div className="col-xs-4 col-sm-1 text-center create-button" data-toggle="collapse" href="#collapseExample">
             <i className="fa fa-plus" aria-hidden="true"></i>
           </div>
-          <div className="col-xs-6 col-sm-1 text-center delete-button" onClick={this.onSubmitFormClick}>
+          <div className="col-xs-4 col-sm-1 text-center delete-button" onClick={this.onSubmitFormClick}>
             <i className="fa fa-trash" aria-hidden="true"></i>
+          </div>
+          <div className="col-xs-4 col-sm-1 text-center create-button" onClick={this.logoutUser}>
+            <i className="fa fa-sign-out" aria-hidden="true"></i>
           </div>
         </div>
 
@@ -182,6 +200,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return { deleteQuiz: bindActionCreators(actions.deleteQuiz, dispatch),
            fetchingQuiz: bindActionCreators(actions.fetchingQuiz, dispatch),
-           fetchedQuiz: bindActionCreators(actions.fetchedQuiz, dispatch) }
+           fetchedQuiz: bindActionCreators(actions.fetchedQuiz, dispatch),
+           loginUser: bindActionCreators(actions.loginUser, dispatch) }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App);

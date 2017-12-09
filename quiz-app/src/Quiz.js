@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {browserHistory} from 'react-router';
 
 //import axios, actions, and connect
 import axios from 'axios';
@@ -16,6 +17,14 @@ class Quiz extends Component {
     }
     //bind onSubmitQuestion event
     this.onSubmitQuestion = this.onSubmitQuestion.bind(this);
+    //bind onClick event on signin button
+    this.toDashboard = this.toDashboard.bind(this);
+  }
+
+  //On click event that fires when user clicks on sign in button
+  toDashboard(){
+    //go to dashboard
+    browserHistory.replace('/dashboard');
   }
 
   //Makes a get request to get 10 random question
@@ -109,13 +118,16 @@ class Quiz extends Component {
           <div className="container">
 
           <div className="row" style={{background:'#333'}}>
-            <div className="col-xs-12 col-sm-9" style={{padding:'20px', color:'white', fontSize:'32px'}}>
+            <div className="col-xs-12 col-sm-8" style={{padding:'20px', color:'white', fontSize:'32px'}}>
               <span>Quiz-Co App</span>
             </div>
-            <div className="col-xs-5 col-sm-1 text-center create-button" data-toggle="collapse" href="#collapseExample">
+            <div className="col-xs-3 col-sm-1 text-center create-button" data-toggle="collapse" href="#collapseExample">
               {this.state.score}
             </div>
-            <div className="col-xs-7 col-sm-2 text-center delete-button" onClick={this.onSubmitFormClick}>Points</div>
+            <div className="col-xs-6 col-sm-2 text-center delete-button" onClick={this.onSubmitFormClick}>Points</div>
+            <div className="col-xs-3 col-sm-1 text-center create-button" onClick={this.toDashboard}>
+              <i className="fa fa-sign-in" aria-hidden="true"></i>
+            </div>
           </div>
 
           <div className="row text-left" style={{background:'#f5f5f5'}}>

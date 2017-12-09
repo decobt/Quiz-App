@@ -1,6 +1,16 @@
+import Cookies from 'universal-cookie';
+
+//define and check for cookie
+const cookies = new Cookies();
+var status = cookies.get('status');
+if (status === undefined){
+  status = {loggedIn:false};
+}
+
+//define initial state variables
 const initialState = {
   isFetching: false,
-  loggedIn: false,
+  loggedIn: status.loggedIn,
   byHash:[]
 }
 
@@ -11,7 +21,7 @@ const quizReducer = function (state = initialState, action){
       return {...state,
         byHash: {
           ...state.byHash,
-          [action.payload.id]: action.payload
+          [state.byHash.length]: action.payload
         }
       }
     }
@@ -20,8 +30,8 @@ const quizReducer = function (state = initialState, action){
     }
     case 'FETCHED_QUIZ':{
       return {
-        loggedIn: state.loggedIn,
         isFetching:false,
+        loggedIn: state.loggedIn,
         byHash: action.payload.byHash
       }
     }
