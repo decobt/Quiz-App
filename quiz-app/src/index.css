@@ -72,3 +72,12 @@ input[type=radio] {
 .answer:hover{
   background:#337ab7;
 }
+.radio-boxes{
+  background:#538fbe;
+  padding:25px;
+  border-bottom:5px solid #2d6898;
+  border-right:5px solid #2d6898;
+}
+.radio-boxes:hover{
+  background:#2980b9;
+}
