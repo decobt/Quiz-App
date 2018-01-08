@@ -141,7 +141,7 @@ class Quiz extends Component {
 
           <div className="row">
             <div className="display text-center" style={{padding:'50px 10px', color:'#fefefe', background:'#c0392b', borderRadius:'3px'}}>
-              <h3>{prompt.question}</h3>
+              <h3><strong>{prompt.question}</strong></h3>
             </div>
           </div>
 

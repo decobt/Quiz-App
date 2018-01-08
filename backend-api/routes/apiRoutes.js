@@ -19,11 +19,8 @@ apiRoutes.route('/quiz')
     //call model function to add data to db, pass callback function
     quizModel.addQuiz(req.body, returnResponse, res);
   })
-  .put(function (req, res) {
-    res.json({'description':quizModel.findAllQuiz()});
-  })
   .delete(function (req, res) {
-    console.log(req.body.items)
+    //console.log(req.body.items)
     quizModel.deleteQuiz(req.body.items, returnResponse, res);
   });
 
@@ -35,15 +32,6 @@ apiRoutes.route('/quiz/random')
 apiRoutes.route('/:quiz/question')
     .get(function (req, res) {
       res.json({'description':quizModel.findRandom()});
-    })
-    .post(function (req, res) {
-      res.json({'description':quizModel.findAllQuiz()});
-    })
-    .put(function (req, res) {
-      res.json({'description':quizModel.findAllQuiz()});
-    })
-    .delete(function (req, res) {
-      res.json({'description':quizModel.findAllQuiz()});
     });
 
 module.exports = apiRoutes;
