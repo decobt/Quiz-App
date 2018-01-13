@@ -25,7 +25,7 @@ class AddQuizForm extends Component {
 
     var self = this;
     //make api post request, send data
-    axios.post('/api/quiz', {question:question, options:options.split(','), answer:answer})
+    axios.post('https://frozen-atoll-25087.herokuapp.com/api/quiz', {question:question, options:options.split(','), answer:answer})
     .then(function (response) {
       //get the response
       //console.log(response);

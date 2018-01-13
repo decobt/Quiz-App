@@ -66,7 +66,7 @@ class App extends Component {
     //console.log(items);
     //make a call to the api, pass the items
     // items = [id1, id2, id3....]
-    axios.delete('api/quiz', {data: {items: items}} )
+    axios.delete('https://frozen-atoll-25087.herokuapp.com/api/quiz', {data: {items: items}} )
     .then(function (response){
       //get the response from the api
       //console.log(response.data);
@@ -96,7 +96,7 @@ class App extends Component {
     //dispatch action that you are about to fetch data
     self.props.fetchingQuiz();
     //make a get call to the api
-    axios.get('/api/quiz')
+    axios.get('https://frozen-atoll-25087.herokuapp.com/api/quiz')
     .then(function (response) {
       //when you get the response data
       var byHash=[];

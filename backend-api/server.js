@@ -1,10 +1,13 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var cors = require('cors');
 
 var app = express();
 
 // parse application/json
 app.use(bodyParser.json())
+
+app.use(cors());
 
 //define where are public files (css,js,images) and favicon
 app.use("/public", express.static('public'));

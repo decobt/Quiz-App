@@ -2,7 +2,7 @@
   "name": "quiz-app",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8080",
+  "proxy": "https://frozen-atoll-25087.herokuapp.com",
   "dependencies": {
     "axios": "^0.17.1",
     "react": "^16.2.0",

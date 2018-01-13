@@ -33,7 +33,7 @@ class Quiz extends Component {
     //dispatch action that you are about to fetch data
     self.props.fetchingQuiz();
     //make a get call to the api
-    axios.get('/api/quiz/random')
+    axios.get('https://frozen-atoll-25087.herokuapp.com/api/quiz/random')
     .then(function (response) {
       //when you get the response data
       var byHash=[];
