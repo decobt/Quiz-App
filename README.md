@@ -29,6 +29,7 @@ http://localhost:3000
 
 * [ReactJS](https://reactjs.org/) - JS library for building UI
 * [NodeJS](https://nodejs.org/en/) - for executing JavaScript code server-side
+* [Redux](https://redux.js.org/) - a predictable state container for JavaScript apps.
 
 ## Authors
 
