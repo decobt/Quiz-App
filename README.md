@@ -16,15 +16,11 @@ https://github.com/decobt/Quiz-App.git
 ```
 npm install
 ```
-3. Start the backend api, navigate to the folder backend-api and run command
+3. Start the app by running the command
 ```
 npm start
 ```
-4. Start the frontend app, navigate to the folder quiz-app and run command
-```
-npm start
-```
-5. Open app, navigate in the browser to
+4. Open app, navigate in the browser to
 ```
 http://localhost:3000
 ```
