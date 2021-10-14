@@ -12,9 +12,9 @@ These instructions will get you a copy of the project up and running on your loc
 ```
 https://github.com/decobt/Quiz-App.git
 ```
-2. Run the command
+2. Run the command to install dependencies
 ```
-npm install
+npm run dependencies
 ```
 3. Start the app by running the command
 ```
@@ -33,4 +33,4 @@ http://localhost:3000
 
 ## Authors
 
-* **Trayche Roshkoski** - *Initial work* - (https://trajcheroshkoski.com/)
+* **Trayche Roshkoski** - *Initial work* - (https://traycheroshkoski.com/)
